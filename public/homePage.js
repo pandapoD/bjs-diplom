@@ -34,6 +34,10 @@ newMoneyManager.addMoneyCallback = data => ApiConnector.addMoney(data, addBalanc
 function addBalance(response) {
 	if (response.success) {
 		ProfileWidget.showProfile(response.data);
+		newMoneyManager.successMessage = () => {return "Операция прошла успешно"};
+		newMoneyManager.successMessage();
+		//console.log(newMoneyManager.successMessage());
+		newMoneyManager.setMessage(response.data, newMoneyManager.successMessage());
 	} else {
 		newMoneyManager.setMessage(response.data, response.error);
 	}
@@ -43,6 +47,9 @@ newMoneyManager.conversionMoneyCallback = data => ApiConnector.convertMoney(data
 function convesionMoney(response) {
 	if (response.success) {
 		ProfileWidget.showProfile(response.data);
+		newMoneyManager.successMessage = () => {return "Операция прошла успешно"};
+		newMoneyManager.successMessage();
+		newMoneyManager.setMessage(response.data, newMoneyManager.successMessage());
 	} else {
 		newMoneyManager.setMessage(response.data, response.error);
 	}
@@ -52,6 +59,9 @@ newMoneyManager.sendMoneyCallback = data => ApiConnector.transferMoney(data, sen
 function sendMoney(response) {
 	if (response.success) {
 		ProfileWidget.showProfile(response.data);
+		newMoneyManager.successMessage = () => {return "Операция прошла успешно"};
+		newMoneyManager.successMessage();
+		newMoneyManager.setMessage(response.data, newMoneyManager.successMessage());
 	} else {
 		newMoneyManager.setMessage(response.data, response.error);
 	}
@@ -73,6 +83,9 @@ function requestAddUserToFavorites (response) {
 		newFavoritesWidget.clearTable();
 		newFavoritesWidget.fillTable(response.data);
 		newMoneyManager.updateUsersList(response.data);
+		newFavoritesWidget.successMessage = () => {return "Пользователь добавлен"};
+		newFavoritesWidget.successMessage();
+		newFavoritesWidget.setMessage(response.data, newFavoritesWidget.successMessage());
 	} else {
 		newFavoritesWidget.setMessage(response.data, response.error);
 	}
@@ -84,6 +97,9 @@ function requestremoveUserFromFavorites (response) {
 		newFavoritesWidget.clearTable();
 		newFavoritesWidget.fillTable(response.data);
 		newMoneyManager.updateUsersList(response.data);
+		newFavoritesWidget.successMessage = () => {return "Пользователь удалён"};
+		newFavoritesWidget.successMessage();
+		newFavoritesWidget.setMessage(response.data, newFavoritesWidget.successMessage());
 	} else {
 		newFavoritesWidget.setMessage(response.data, response.error);
 	}
